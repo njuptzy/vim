@@ -1,0 +1,28 @@
+filet indent on
+se nocp hi=1000 rnu  wmnu ic scs ls=2 sc nomagic report=0 mat=0 sm nu si ts=4 hls sw=4 sts=4 sta
+sy on
+
+:inoremap ( ()<ESC>i
+:inoremap [ []<ESC>i
+:inoremap { {}<ESC>i
+:inoremap {<CR> {<CR>}<ESC>O
+
+:inoremap ) <c-r>=Close(')')<CR>
+:inoremap ] <c-r>=Close(']')<CR>
+:inoremap } <c-r>=Close('}')<CR>
+
+func! Close(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endfunc
+
+map <C-A> ggVG"+y
+" 定义命令 CopyToClipboard，将整个文件复制到系统剪贴板
+command! Clip %w !xclip -sel clip
+" 关闭bb声
+set visualbell
+set t_vb=
+
